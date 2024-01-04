@@ -13,6 +13,16 @@ npm install vue-local-storage-reactivity
 ## Compatibility
 The vue-local-storage-reactivity package is compatible with Vue.js 2.6+ and 3.x
 
+## Features
+Here are some advantages of the 'vue-reactive-local-storage' package:
+
+- Does not require you to state what `localStorage` keys are of interest beforehand
+- Reacts to `localStorage` changes done on other tabs
+- Reacts to new keys as they are added to the `localStorage`
+- Compatible with both Vue.js 2.6 and Vue.js 3.x, so it can be used in a wide range of Vue.js applications
+- Tiny package size
+- Zero-dependencies
+
 ## Usage
 
 To use the `vue-local-storage-reactivity` package, you need to import and use it as follows:
