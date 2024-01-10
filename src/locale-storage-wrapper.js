@@ -11,18 +11,19 @@ const reactiveNotifier = reactive({});
 
 const getItem = (keyName) => localStorageProxy[keyName];
 const setItem = (keyName, value) => set(localStorageProxy, keyName, value);
-const removeItem = (keyName, value) => set(localStorageProxy, keyName, null);
+const removeItem = (keyName) => set(localStorageProxy, keyName, null);
 
 const localStorageProxy = new Proxy({}, {
   get(_, keyName) {
     if (keyName === 'getItem') { return getItem; }
     if (keyName === 'setItem') { return setItem; }
     if (keyName === 'removeItem') { return removeItem; }
-    
+
     const shortKeyName = keyShortner(keyName);
-    if (Reflect.get(reactiveNotifier, shortKeyName) === undefined) {
-      set(reactiveNotifier, shortKeyName, ++counter);
+    if (!(shortKeyName in reactiveNotifier)) {
+      set(reactiveNotifier, shortKeyName, undefined);
     }
+    Reflect.get(reactiveNotifier, shortKeyName); // invoke reactive property getter
     return window.localStorage.getItem(keyName);
   },
 
